@@ -145,7 +145,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4411305546473658, guid: d3f65bf385a3c3847ab550b32f3e53e8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.42836666
+      value: 0.405
       objectReference: {fileID: 0}
     - target: {fileID: 4411305546473658, guid: d3f65bf385a3c3847ab550b32f3e53e8, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2216,6 +2216,31 @@ PrefabInstance:
     - target: {fileID: 7029985802354465075, guid: 97bed0adaa082b945b7cb5eb90fa48b3,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7029985802354465076, guid: 97bed0adaa082b945b7cb5eb90fa48b3,
+        type: 3}
+      propertyPath: moveSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7029985802354465076, guid: 97bed0adaa082b945b7cb5eb90fa48b3,
+        type: 3}
+      propertyPath: MoveTowardCursor
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7029985802354465078, guid: 97bed0adaa082b945b7cb5eb90fa48b3,
+        type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1338975330}
+    - target: {fileID: 7029985802853851188, guid: 97bed0adaa082b945b7cb5eb90fa48b3,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: ba740a18cd3e51842a285f979fb267a0, type: 2}
+    - target: {fileID: 7029985802853851188, guid: 97bed0adaa082b945b7cb5eb90fa48b3,
+        type: 3}
+      propertyPath: m_ApplyRootMotion
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

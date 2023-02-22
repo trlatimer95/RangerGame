@@ -1,16 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("Movement Multipliers")]
     [SerializeField] private float moveSpeed;
+    [SerializeField] private float jumpForce;
+
+    [SerializeField] private bool MoveTowardCursor;
 
     private PlayerInput playerInput;
     private Rigidbody rb;
     private PlayerInputActions playerInputActions;
     private Camera mainCamera;
+    private Animator animator;
 
     private Vector3 currentControllerLookDirection = Vector3.zero;
 
@@ -19,6 +25,7 @@ public class PlayerController : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
         rb = GetComponent<Rigidbody>();
         mainCamera = Camera.main;
+        animator = GetComponentInChildren<Animator>();
 
         playerInputActions = new PlayerInputActions();
         playerInputActions.Player.Enable();
@@ -30,18 +37,39 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        // Get current controller look input
+        // Get current controller look input -- TODO: Try moving to Move function
         Vector2 lookInputVector = playerInputActions.Player.Look.ReadValue<Vector2>();
-        if (lookInputVector != Vector2.zero )
-            currentControllerLookDirection = Vector3.right * lookInputVector.x + Vector3.forward * lookInputVector.y;    
+        if (lookInputVector != Vector2.zero)
+            currentControllerLookDirection = Vector3.right * lookInputVector.x + Vector3.forward * lookInputVector.y;   
     }
 
     private void FixedUpdate()
-    {     
-        // Movement
-        Vector2 inputVector = playerInputActions.Player.Movement.ReadValue<Vector2>();
-        rb.velocity = new Vector3(inputVector.x, 0, inputVector.y) * moveSpeed;
-   
+    {
+        Move();
+        Look();      
+    }
+
+    public void Jump(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+    }
+
+    private void Move()
+    {
+        // Get Movement input and multiply by moveSpeed to get velocity needed
+        Vector2 movementVelocity = playerInputActions.Player.Movement.ReadValue<Vector2>() * moveSpeed;
+
+        if (MoveTowardCursor)
+            rb.velocity = ((transform.right * movementVelocity.x) + (transform.forward * movementVelocity.y));
+        else
+            rb.velocity = new Vector3(movementVelocity.x, rb.velocity.y, movementVelocity.y);
+
+        animator.SetFloat("speed", movementVelocity.sqrMagnitude);
+    }
+
+    private void Look()
+    {      
         // Look by controller
         if (currentControllerLookDirection.sqrMagnitude > 0)
         {
@@ -59,12 +87,6 @@ public class PlayerController : MonoBehaviour
                 Vector3 pointToLook = cameraRay.GetPoint(rayLength);
                 transform.LookAt(new Vector3(pointToLook.x, transform.position.y, pointToLook.z));
             }
-        }     
-    }
-
-    public void Jump(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-            Debug.Log("Jump");
+        }
     }
 }

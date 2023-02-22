@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+  jumpForce: 2.5
 --- !u!114 &7029985802354465078
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -95,6 +96,14 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: ce980323-8cd6-4aa1-adf2-dba6c7c9e141
     m_ActionName: Player/Movement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b20e6224-3131-4c33-ad55-984f6e589946
+    m_ActionName: Player/Look
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: df22d7cf-b328-487d-86d3-34b745f59941
+    m_ActionName: Player/Fire[/Mouse/leftButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
