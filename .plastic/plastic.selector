@@ -1,4 +1,4 @@
-repository "Winter Survival@trlatimer@cloud"
+repository "Ranger Game@trlatimer@cloud"
   path "/"
     br "/main"
     co "/main"
